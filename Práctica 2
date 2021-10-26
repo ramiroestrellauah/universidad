@@ -1,0 +1,307 @@
+/*
+Programa:		practica2.c
+Proposito:		Realizar un sarie de ejercicios
+Autor:			Ramiro Tomás Estella Pernetii
+Fecha:			18/10/2021
+Observaciones:	El ejercicio 3 no se realiza
+*/
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+
+// DECLARACIONES DE FUNCIONES
+int menu();
+int desplazar(int, int);
+int parImpar(int);
+void operacionesLogicasBits();
+int ponerACeroBit(int, int);
+long factorial(long);
+int numeroBits(int);
+int cambiarBits(int, int, int);
+void intercambiar(double*, double*);
+double mediaAritmetica(double, double, double, double);
+
+int main()
+{
+	//DEFINICIONES DE VARIABLES
+	int opcion;												//opción elegida del menú
+	int x = 0, y = 0, z = 0, p = 0;
+	long xl = 0, yl = 0;
+	double d1 = 0.0, d2 = 0.0, d3 = 0.0, d4 = 0.0;
+	int ñ = 5;
+	setlocale(0, "");
+
+	printf("PRÁCTICA 2\n");
+	printf("==========\n");
+	opcion = menu();// llama/invoca a la función "menu"
+	while (opcion != 10)// sentencia repetitiva
+	{
+		switch (opcion)// sentencia condicional
+		{
+		case 1:
+			printf("Ejercicio 1: Desplazar\n");				// llama a la función "printf"
+			// Solicitar datos introducidos por el teclado
+			printf("Introduzca un número: ");
+			scanf("%d", &y);
+			printf("Posiciones a desplazar a la derecha: ");
+			scanf("%d", &z);
+			// Llamar a la función "desplazar"
+			x = desplazar(y, z);
+			// Mostrar el resultado
+			printf("El número desplazado es: %d\n\n", x);
+			break;
+		case 2:
+			printf("Ejercicio 2: Par o impar\n");
+			// Solicitar datos introducidos por el teclado
+			printf("Introduzca un número: ");
+			scanf("%d", &y);
+			// Llamar a la función "parImpar"
+			x = parImpar(y);
+			// Mostrar el resultado
+			if (x != 0)
+				printf("El número %d es impar\n\n", y);
+			else
+				printf("El número %d es par\n\n", y);
+			break;
+		case 3:
+			printf("Ejercicio 3: operaciones lógicas y a nivel de bits\n");
+			// Llamar a la función "operacionesLogicasBits"
+			operacionesLogicasBits();
+			break;
+		case 4:
+			printf("Ejercicio 4: Poner a cero un bit\n");
+			//Solicitar datos introducidos por el teclado
+			printf("Introduzca un número: ");
+			scanf("%d", &y);
+			printf("Posición del bit a poner a cero: ");
+			scanf("%d", &z);
+			// Llamar a la función "ponerACeroBit"
+			x = ponerACeroBit(y, z);
+			//Mostrar el resultado
+			printf("El número modificado es : %d\n\n", x);
+			break;
+		case 5:
+			printf("Ejercicio 5: Factorial\n");
+			do
+			{
+				printf("Introduzca un número entero positivo: ");
+				scanf("%ld", &yl);
+			} while (yl < 0);
+			// Llamar a la función "factorial"
+			xl = factorial(yl);
+			// Mostrar el resultado
+			if (xl == -1)
+				printf("No es posible calcular el factorial\n");
+			else
+				printf("El factorial de %ld es: %ld\n\n", yl, xl);
+			break;
+		case 6:
+			printf("Ejercicio 6: Numero de bits\n");
+			//Solicitar datos introducidos por el teclado
+			do
+			{
+				printf("Introduzca un número entero positivo: ");
+				scanf("%d", &y);
+			} while (y < 0);
+			// Llamar a la función "factorial"
+			x = numeroBits(y);
+			// Mostrar el resultado
+			printf("El número de bits para representar %d es: %d\n\n", y, x);
+			break;
+		case 7:
+			printf("Ejercicio 7: Cambiar bits\n");
+			//Solicitar datos introducidos por el teclado
+			do
+			{
+				printf("Introduzca un número entero positivo: ");
+				scanf("%d", &y);
+			} while (y < 0);														// Se repetirá la misma frase hasta que se ponga un número positivo
+			printf("Posición del bit inicial a invertir: ");
+			scanf("%d", &p);
+			printf("Número de bits a invertir: ");
+			scanf("%d", &z);
+			// Llamar a la función "cambiarBits"
+			x = cambiarBits(y, p, z);
+			//Mostrar el resultado
+			if (x == -1)
+				printf("Número de bits no válido\n");
+			else
+				printf("El número modificado es: %d\n\n", x);
+			break;
+		case 8:
+			printf("Ejercicio 8: Intercambiar\n");
+			//Solicitar datos introducidos por el teclado
+			printf("Introduzca el valor de d1: ");
+			scanf("%lf", &d1);
+			printf("Introduzca el valor de d2: ");
+			scanf("%lf", &d2);
+			// Llamar a la función "intercambiar"
+			intercambiar(&d1, &d2);
+			//Mostrar el resultado
+			printf("Valores intercambiados: d1 = %g, d2 = %g\n\n", d1, d2);
+			break;
+		case 9:
+			printf("Ejercicio 9: Media Aritmética\n");
+			//Solicitar datos introduciso por el teclado
+			printf("Número: ");
+			scanf("%lf", &d1);
+			printf("Número: ");
+			scanf("%lf", &d2);
+			printf("Número: ");
+			scanf("%lf", &d3);
+			printf("Número: ");
+			scanf("%lf", &d4);
+			// Llamar a la función "mediaAritmetica"
+			mediaAritmetica(d1, d2, d3, d4);
+			//Mostrar el resultado
+			printf("Media: %g\n", mediaAritmetica(d1, d2, d3, d4));
+			break;
+		default:
+			printf("ERROR: Opción incorrecta.\n");
+			break;
+		}
+		system("pause"); // llamar a la función "system"
+		opcion = menu(); // llamar a la función "menu"
+	}
+}
+
+
+// DEFINICIONES DE FUNCIONES
+int menu() // definición de la función "menu"
+{
+	int op;
+	do // sentencia repetitiva
+	{
+		system("cls");
+		printf("\n"
+			"\t01.- Ejercicio 1\n"
+			"\t02.- Ejercicio 2\n"
+			"\t03.- Ejercicio 3\n"
+			"\t04.- Ejercicio 4\n"
+			"\t05.- Ejercicio 5\n"
+			"\t06.- Ejercicio 6\n"
+			"\t07.- Ejercicio 7\n"
+			"\t08.- Ejercicio 8\n"
+			"\t09.- Ejercicio 9\n"
+			"\t10.- Salir\n"
+			"\n"
+			"Elija una opción: ");
+		scanf("%d", &op); // llamar a la función "scanf"
+		if (op < 1 || op > 10) // sentencia condicional
+		{
+			// printf("Opción no válida\n");
+			printf("Opción no válida\n", 0xA2, 0xA0);
+			system("pause"); // detenerse hasta pulsar una tecla
+		}
+	} while (op < 1 || op > 10); // condición
+	return op;
+}
+/* Ejercicio 1 "Escribir una función desplazar que visualice el valor de un número entero desplazado hacia la
+derecha n posiciones.La función recibirá como parámetro el número a desplazar y el valor del
+desplazamiento.La función devolverá el nuevo entero desplazado."*/
+int desplazar(int n, int nPos)
+{
+	int nDesplazado;
+	nDesplazado = n >> nPos;
+	return nDesplazado;
+}
+/*Ejercicio 2 "Escribir una función parImpar que compruebe si un número entero es par o impar. La función
+recibirá como parámetro el número y devolverá 0 si es par y 1 si es impar." */
+int parImpar(int n)
+{
+	int resultado;
+	if (n % 2 == 0)
+		resultado = 0;
+	else
+		resultado = 1;
+	return resultado;
+}
+/*Ejercicio 3 "Escribir una función operacionesLogicasBits que permita verificar los resultados de las
+operaciones especificadas en el código mostrado a continuación. Primero, escriba en un folio los
+resultados que usted calcule al ejecutar mentalmente cada una de las operaciones incluidas en el
+código de la función."*/
+void operacionesLogicasBits()
+{
+	int a = 8, b = 0, c = 15, d = 93, e, r1, r2, r3, r4, r5, r6;
+	r1 = a && b || c && !d;											// r1 = 0
+	r2 = !a || b && c || d;											// r2 = 1
+	r3 = a < b || !c > d;											// r3 = 0
+	r4 = a + b > d - c;												// r4 = 0
+	r5 = a && b && !c || !(a && b) && c;							// r5 = 1
+	a = 0x12; b = 0x56; c = 0x9a; d = 0x0f; e = 0360;
+	r1 = a & b | c;													// r1 = 154
+	r2 = c & 0177;													// r2 = 26
+	r3 = ~a | b ^ c;												// r3 = -19
+	r4 = e & c;														// r4 = 144
+	r5 = r4 & ~077;													// r5 = 128
+	r6 = (a & d) << 4 | (a & e) >> 4;								// r6 = 33
+}
+/*Ejercicio 4 "Escribir una función ponerACeroBit que ponga a cero un bit en una posición concreta de un
+número entero. La función recibirá como parámetros el número y la posición del bit a poner a 0. La
+función devolverá el nuevo valor obtenido."*/
+int ponerACeroBit(int n, int nPosBit)
+{
+	int resultado = 0, mascara;
+	mascara = 1 << nPosBit;
+	resultado = n & ~mascara;
+	return resultado;
+}
+/*Ejercicio 5 "Escribir una función factorial que calcule el factorial de un número entero positivo entre 0 y 16.
+La función recibirá como parámetro el número y devolverá como resultado el factorial, o el valor de
+-1 si el número no está entre 0 y 16."*/
+long factorial(long n)
+{
+	long i = 0, factorial = 1;
+	if (n < 0 || n > 16) return -1;
+	for (i = n; i > 0; i--)
+		factorial *= i;
+	return factorial;
+}
+/*Ejercicio 6 "Escribir una función numeroBits que pregunte al usuario un número entero positivo y devuelva el
+número mínimo de bits necesario para representar ese número en binario. Por ejemplo, dado el
+número 12, necesitamos 4 bits para representarlo (porque 23 < 12 y 24 > 12)"*/
+int numeroBits(int n)
+{
+	int dosElevadoN = 2, nbits = 1; // 2^1 = 2
+	while (dosElevadoN <= n)
+	{
+		dosElevadoN = dosElevadoN * 2;
+		nbits++;
+	}
+	return nbits;
+}
+/*Ejercicio 7 "Escribir una función cambiarBits que aplique a un número entero positivo la transformación
+siguiente: invertir (cambiando 1 por 0 y viceversa) los n bits correspondientes a ese número que
+estén a partir de la posición p (la posición 0 es la posición más a la derecha). No se podrá cambiar
+más bits que los que hay entre las posiciones p y 0 (p+1). La función devolverá el número
+transformado o -1 si el número de bits a cambiar no es válido."*/
+int cambiarBits(int n, int pos, int nbits)
+{
+	int i = 0, mascara = 0;
+	if (nbits > pos + 1) return -1;
+	for (i = pos; i > pos - nbits; i--)
+	{
+		mascara = 1 << i;
+		n = n ^ mascara;
+	}
+	return n;
+}
+/*Ejercicio 8 "Escribir una función intercambiar que intercambie dos valores en coma flotante. La función
+recibirá como parámetros los dos números de tipo double, intercambiará sus valores y no
+devolverá nada"*/
+void intercambiar(double *n1, double *n2)
+{
+	double aux = *n1;
+	*n1 = *n2;
+	*n2 = aux;
+}
+/*Ejercicio 9 "Escribir una función mediaAritmetica que calcule la media aritmética de 4 números. Los números
+pueden tener decimales. La función devolverá la media aritmética."*/
+double mediaAritmetica(double d1, double d2, double d3, double d4)
+{
+	int resultado;
+	resultado = ((d1 + d2 + d3 + d4) / 4);
+	return resultado;
+}
